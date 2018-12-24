@@ -1,0 +1,34 @@
+File Edit Options Buffers Tools Python Help                
+import pyspark
+
+# Setting up spark context
+                                                           
+sc = pyspark.SparkContext()
+sc.setLogLevel("ERROR")
+
+# Question:
+# The list of unique donors (name/city) who gave an individual
+# donation of exactly $25000. The names must be written to a file.
+
+dataFile = sc.textFile("NYfec.gz")
+
+# Step 1: Map to unique name and donation
+# Mapper to get unique name and how much donated           
+# param x = each line of the file                          
+def getNameDonation(x):
+
+    fields = x.split("|")
+    name = fields[7]   
+
+    city = fields[8]
+    uniqueName = name + city
+
+    donation = fields[14]
+
+    return (uniqueName, donation)
+
+a = textData.map(getNameDonation)
+
+# Filter by donations == "25000"
+b = a.filter(lambda x: x[1] == "25000")
+

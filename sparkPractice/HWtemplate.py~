@@ -1,0 +1,15 @@
+import pyspark
+
+sc = pyspark.SparkContext()
+sc.setLogLevel("ERROR")
+
+a = sc.textFile('NYfec.gz')
+
+
+
+
+
+
+
+
+
